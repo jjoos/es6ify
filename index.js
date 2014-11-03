@@ -64,9 +64,10 @@ function compileFile(file, src) {
 }
 
 function es6ify(filePattern) {
-  filePattern =  filePattern || /\.js$/;
+  filePattern = filePattern || /\.js$/;
 
-  return function (file) {
+  return function (file, options) {
+    if ('filePattern' in options) filePattern = options['filePattern'];
 
     // Don't es6ify the traceur runtime
     if (file === runtime) return through();
